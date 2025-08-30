@@ -2,16 +2,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: background-color 0.5s ease;
     padding: 20px;
+    padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+    -webkit-user-select: none;
+    user-select: none;
+    overflow: hidden;
 }
 
 .container {
@@ -22,60 +29,74 @@ body {
 
 h1 {
     color: white;
-    font-size: 2.5em;
-    margin-bottom: 30px;
+    font-size: 2.2em;
+    margin-bottom: 25px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
 }
 
 .aroma-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.97);
     border-radius: 20px;
-    padding: 40px 30px;
+    padding: 35px 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     animation: fadeIn 0.5s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 .category {
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #666;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    font-weight: 600;
 }
 
 .oil-name {
-    font-size: 2em;
+    font-size: 1.8em;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .description {
-    font-size: 1.1em;
-    line-height: 1.6;
+    font-size: 1.05em;
+    line-height: 1.7;
     color: #555;
+    -webkit-user-select: text;
+    user-select: text;
 }
 
 .change-button {
     background: white;
     color: #333;
     border: none;
-    padding: 15px 40px;
-    font-size: 1.2em;
+    padding: 18px 50px;
+    font-size: 1.1em;
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 600;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-.change-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.3);
+@media (hover: hover) {
+    .change-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 25px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .change-button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Category background colors */
@@ -122,16 +143,92 @@ h1 {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 430px) {
     h1 {
-        font-size: 2em;
+        font-size: 1.9em;
+        margin-bottom: 20px;
     }
     
     .oil-name {
-        font-size: 1.5em;
+        font-size: 1.6em;
     }
     
     .aroma-card {
         padding: 30px 20px;
+        margin-bottom: 20px;
+    }
+    
+    .description {
+        font-size: 1em;
+    }
+    
+    .change-button {
+        padding: 16px 45px;
+        font-size: 1.05em;
+    }
+}
+
+@media (max-width: 375px) {
+    h1 {
+        font-size: 1.7em;
+    }
+    
+    .oil-name {
+        font-size: 1.4em;
+    }
+    
+    .aroma-card {
+        padding: 25px 18px;
+    }
+    
+    .description {
+        font-size: 0.95em;
+    }
+}
+
+@media (max-height: 700px) and (orientation: portrait) {
+    h1 {
+        margin-bottom: 15px;
+    }
+    
+    .aroma-card {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 430px) {
+    body {
+        padding: 10px env(safe-area-inset-right, 20px) 10px env(safe-area-inset-left, 20px);
+    }
+    
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .aroma-card {
+        padding: 20px 25px;
+        margin-bottom: 15px;
+    }
+    
+    .category {
+        margin-bottom: 8px;
+        font-size: 0.8em;
+    }
+    
+    .oil-name {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    
+    .description {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+    
+    .change-button {
+        padding: 12px 35px;
+        font-size: 0.95em;
     }
 }
